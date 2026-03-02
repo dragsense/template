@@ -5,7 +5,7 @@ services:
       context: ..
       dockerfile: shared/Dockerfile
       target: prod
-    container_name: vivast-app-staging
+    container_name: template-app-staging
     ports:
       - "3001:3000" # Backend port
     env_file:
@@ -24,7 +24,7 @@ services:
   # Redis Cache
   redis:
     image: redis:latest
-    container_name: vivast-redis-staging
+    container_name: template-redis-staging
     restart: unless-stopped
     ports:
       - "6380:6379"
@@ -40,9 +40,9 @@ services:
 
   redis-commander:
     image: rediscommander/redis-commander:latest
-    container_name: vivast-redis-commander-staging
+    container_name: template-redis-commander-staging
     environment:
-      - REDIS_HOSTS=local:vivast-dragonfly-staging:6379
+      - REDIS_HOSTS=local:template-dragonfly-staging:6379
     ports:
       - "8082:8081"
     depends_on:
@@ -53,7 +53,7 @@ services:
 
   dragonfly:
     image: docker.dragonflydb.io/dragonflydb/dragonfly:latest
-    container_name: vivast-dragonfly-staging
+    container_name: template-dragonfly-staging
     restart: unless-stopped
     mem_limit: 6g # optional, matches Docker memory
     command: >
@@ -67,12 +67,12 @@ services:
   # PostgreSQL 17 Database
   postgres:
     image: postgres:17
-    container_name: vivast-postgres-staging
+    container_name: template-postgres-staging
     restart: unless-stopped
     ports:
       - "5434:5432"
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-vivast_db}
+      POSTGRES_DB: ${POSTGRES_DB:-template_db}
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
       POSTGRES_HOST_AUTH_METHOD: trust
@@ -90,7 +90,7 @@ services:
   # Mailpit for email testing
   mailpit:
     image: axllent/mailpit:latest
-    container_name: vivast-mailpit-staging
+    container_name: template-mailpit-staging
     restart: unless-stopped
     ports:
       - "1025:1025" # SMTP
@@ -101,7 +101,7 @@ services:
    # SRS - Host network for WebRTC ICE (UDP works); app reaches via host.docker.internal
   srs:
     image: ossrs/srs:latest
-    container_name: vivast-srs-staging
+    container_name: template-srs-staging
     environment:
       CANDIDATE: "35.84.225.108"
       SRS_RTC_SERVER_CANDIDATE: "35.84.225.108"

@@ -1,12 +1,12 @@
 services:
   # Full-Stack Service (Backend + Frontend in one container)
   app:
-    image: vivast-app
+    image: template-app
     build:
       context: ..
       dockerfile: shared/Dockerfile
       target: dev
-    container_name: vivast-app
+    container_name: template-app
     ports:
       - "3000:3000" # Backend port
       - "5173:5173" # Frontend port
@@ -40,7 +40,7 @@ services:
   # Redis Cache
   redis:
     image: redis:latest
-    container_name: vivast-app-redis
+    container_name: template-app-redis
     restart: unless-stopped
     ports:
       - "6381:6379"
@@ -54,7 +54,7 @@ services:
 
   dragonfly:
     image: docker.dragonflydb.io/dragonflydb/dragonfly:latest
-    container_name: vivast-app-dragonfly
+    container_name: template-app-dragonfly
     restart: unless-stopped
     mem_limit: 6g # optional, matches Docker memory
     command: >
@@ -67,7 +67,7 @@ services:
 
   redis-commander:
     image: rediscommander/redis-commander:latest
-    container_name: vivast-app-redis-commander
+    container_name: template-app-redis-commander
     environment:
       - REDIS_HOSTS=local:dragonfly:6379
     ports:
@@ -81,7 +81,7 @@ services:
   # Mailpit for email testing
   mailpit:
     image: axllent/mailpit:latest
-    container_name: vivast-app-mailpit
+    container_name: template-app-mailpit
     restart: unless-stopped
     ports:
       - "1025:1025" # SMTP
@@ -92,12 +92,12 @@ services:
   # PostgreSQL 17 Database
   postgres:
     image: postgres:17
-    container_name: vivast-app-postgres
+    container_name: template-app-postgres
     restart: unless-stopped
     ports:
       - "5433:5432"
     environment:
-      POSTGRES_DB: vivast_db
+      POSTGRES_DB: template_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_HOST_AUTH_METHOD: trust
@@ -114,7 +114,7 @@ services:
   # SRS - Host network for WebRTC ICE (UDP works); app reaches via host.docker.internal 
   srs:
     image: ossrs/srs:latest
-    container_name: vivast-app-srs
+    container_name: template-app-srs
     environment:
       CANDIDATE: "127.0.0.1"
       SRS_RTC_SERVER_CANDIDATE: "127.0.0.1"

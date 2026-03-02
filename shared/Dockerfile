@@ -120,5 +120,5 @@ RUN mkdir -p ./backend/logs
 COPY ecosystem.config.js ./
 
 # Start with PM2 (can be restarted via deploy script)
-CMD ["pm2", "start", "ecosystem.config.js", "--only", "vivast-staging", "--no-daemon"]
+CMD ["pm2", "start", "ecosystem.config.js", "--only", "template-staging", "--no-daemon"]
 

@@ -56,7 +56,7 @@ export function setupSecurity(app: INestApplication, configService: ConfigServic
             scriptSrc: ["'self'", "'unsafe-inline'", 'https://cdn.jsdelivr.net', 'https://js.stripe.com'],
             styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
             imgSrc: ["'self'", "data:","blob:", req.protocol + "://" + req.get('host'), "http://localhost:3000",
-              "http://*.localhost:3000", "https://staging.vivast.io", "https://*.staging.vivast.io"],
+              "http://*.localhost:3000", "https://staging.template.io", "https://*.staging.template.io"],
             connectSrc: srsConnectSrc,
             frameSrc: ["'self'", "https://js.stripe.com", "https://hooks.stripe.com"],
             frameAncestors: ["'none'"],
