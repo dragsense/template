@@ -80,6 +80,8 @@ export class BillingsController {
           );
         }
       },
+    }, {
+      skipSuperAdminOwnDataOnly: true,
     });
 
     for (const b of result.data) {

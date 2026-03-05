@@ -36,8 +36,6 @@ services:
         condition: service_started
       mqtt:
         condition: service_started
-      rabbitmq:
-        condition: service_started
       mediamtx:
         condition: service_started
     # command: ["sh", "-c", "cd /app/backend && npm run dev & cd /app/frontend && npm run dev & wait"]
@@ -131,23 +129,6 @@ services:
       - "9001:9001"   # WebSocket
     volumes:
       - ./mqtt/mosquitto.conf:/mosquitto/config/mosquitto.conf
-    networks:
-      - app-network
-
-  rabbitmq:
-    image: rabbitmq:3-management
-    container_name: template-app-rabbitmq
-    restart: unless-stopped
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    volumes:
-      - rabbitmq_data:/var/lib/rabbitmq
-    healthcheck:
-      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
     networks:
       - app-network
 

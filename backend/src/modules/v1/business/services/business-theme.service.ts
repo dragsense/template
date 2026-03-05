@@ -12,6 +12,7 @@ import { FileUpload } from '@/common/file-upload/entities/file-upload.entity';
 import { CreateBusinessThemeDto, UpdateBusinessThemeDto } from '@shared/dtos/business-dtos/business-theme.dto';
 import { User } from '@/common/base-user/entities/user.entity';
 import { BusinessService } from '../business.service';
+import { Business } from '../entities/business.entity';
 
 @Injectable()
 export class BusinessThemeService extends CrudService<BusinessTheme> {
